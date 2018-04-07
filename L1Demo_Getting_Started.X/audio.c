@@ -19,12 +19,7 @@ void __attribute__((__interrupt__, auto_psv)) _T1Interrupt(void)
 
 	static unsigned short duration = 0;
     static unsigned int ch1_ncount = 0;
-    static unsigned int ch2_ncount = 0;
-    static unsigned int ch3_ncount = 0;
-
     static unsigned short ch1_val = 0;
-    static unsigned short ch2_val = 0;
-    static unsigned short ch3_val = 0;
 
     // Do Channel 1 Stuff
     if (ch1_ncount < 0x7F80) {
@@ -35,27 +30,6 @@ void __attribute__((__interrupt__, auto_psv)) _T1Interrupt(void)
         ch1_ncount = 0;
     }
     ch1_val = sinetable[ch1_ncount>>6];
-
-    // Do Channel 2 Stuff
-    if (ch2_ncount < 0x7F80) {
-        ch2_ncount+=song_ch8f[idx];
-    }
-    else
-    {
-        ch2_ncount = 0;
-    }
-    ch2_val = sinetable[ch2_ncount>>6];
-
-    // Do Channel 3 Stuff
-    if (ch3_ncount < 0x7F80) {
-        ch3_ncount+=song_ch15f[idx];
-    }
-    else
-    {
-        ch3_ncount = 0;
-    }
-    ch3_val = sinetable[ch3_ncount>>6];
-
     
 	// DURATION
 	if(duration < 0x7A1)
@@ -66,18 +40,16 @@ void __attribute__((__interrupt__, auto_psv)) _T1Interrupt(void)
     {
 	 	idx++;
 
-		if(idx == sizeof(song_ch15f) / sizeof(song_ch15f[0]) ) /* loop it! */
+		if(idx == sizeof(song_ch1f) / sizeof(song_ch1f[0]) ) /* loop it! */
 		{
-			idx = 0x36c;
+			idx = 0;
 		}
 
 		duration = 0;
 	}
 	
 	// MIX AND SET AUDIO OUTPUT
-	//PORTB = (sample_1>>2)+(sample_2>>2)+(sample_3>>2); //+(sample_4>>3);
-    
-    PORTB = (ch1_val<<6) + (ch2_val<<6) + (ch3_val<<6);
+    PORTB = (ch1_val<<8);
 
 	_T1IF = 0;
 }
