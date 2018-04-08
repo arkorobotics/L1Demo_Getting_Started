@@ -32,7 +32,7 @@
 
 int main(void) 
 {
-	ANSB = 0x0000;                                                              // Configuation
+	ANSB = 0x0000;                                                              // Configuration
 	ANSC = 0x0000;
 	ANSD = 0x0000;
 	ANSF = 0x0000;
