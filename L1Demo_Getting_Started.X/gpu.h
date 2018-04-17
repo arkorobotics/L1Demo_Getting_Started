@@ -3,13 +3,13 @@
 
 //#define DOUBLE_BUFFERED 1
 
-#define CLOCKDIV 23
+#define CLOCKDIV 25
 #define HOR_RES 320UL
 #define VER_RES 480UL
 #define HOR_FRONT_PORCH 32
 #define HOR_PULSE_WIDTH 48
 #define HOR_BACK_PORCH  32
-#define VER_FRONT_PORCH 10
+#define VER_FRONT_PORCH 20
 #define VER_PULSE_WIDTH 5
 #define VER_BACK_PORCH  10
 
@@ -20,13 +20,15 @@
 #endif
 
 #define VENST_FUDGE 0
-#define HENST_FUDGE -6
+#define HENST_FUDGE 0
 #define VSPOL 0              /* sync polarities */
 #define HSPOL 0
 
 #define PIX_W 1
 #define PIX_H (VER_RES/HOR_RES)
- 
+
+#define HSYNC_MARGIN 10
+
 #define CHR_FGCOLOR	     	 0x5000
 #define CHR_BGCOLOR	     	 0x5100
 #define CHR_FONTBASE         0x5200
@@ -56,6 +58,7 @@ extern __eds__ uint8_t GFXDisplayBuffer[GFX_BUFFER_SIZE] __attribute__((section(
 
 void __attribute__((interrupt, auto_psv))_GFX1Interrupt(void);
 void config_graphics(void);
+uint16_t getHsync(void);
 void config_clut();
 void clut_set(uint8_t index, uint16_t color);
 void config_chr(void);

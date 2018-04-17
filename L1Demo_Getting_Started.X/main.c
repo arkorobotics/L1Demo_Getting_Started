@@ -83,46 +83,40 @@ int main(void)
 		#ifdef DOUBLE_BUFFERED
 			swapBuffers();                                                      // Before drawing the next frame, we must swap buffers
 		#endif
-
+        
         //----------------------------------------------------------------------
-        switch(frames)                                                          // Draw each a color bar on the first 7 frames
-        {
-            case 0:
-                rcc_color(1);
-                rcc_draw(1, 0, HOR_RES/7, VER_RES-1);
-                break;
-            case 1:
-                rcc_color(2);
-                rcc_draw(1+((HOR_RES/7)*1), 0, HOR_RES/7, VER_RES-1);
-                break;
-            case 2:
-                rcc_color(3);
-                rcc_draw(1+((HOR_RES/7)*2), 0, HOR_RES/7, VER_RES-1);
-                break;
-            case 3:
-                rcc_color(4);
-                rcc_draw(1+((HOR_RES/7)*3), 0, HOR_RES/7, VER_RES-1);
-                break;
-            case 4:
-                rcc_color(5);
-                rcc_draw(1+((HOR_RES/7)*4), 0, HOR_RES/7, VER_RES-1);
-                break;
-            case 5:
-                rcc_color(6);
-                rcc_draw(1+((HOR_RES/7)*5), 0, HOR_RES/7, VER_RES-1);
-                break;
-            case 6:
-                rcc_color(7);
-                rcc_draw(1+((HOR_RES/7)*6), 0, HOR_RES/7, VER_RES-1);
-                break;
-        }
+        rcc_color(1);                                                           // Change color to Light Grey = c1
+        rcc_draw(1, 0, HOR_RES/7, VER_RES-1);                                   // Draw rectangle starting at x=1, y=0, Width: 1/7*Horizontal Res, Height: Vertical Res - 1
+
+        rcc_color(2);
+        rcc_draw(1+((HOR_RES/7)*1), 0, HOR_RES/7, VER_RES-1);
+
+        rcc_color(3);
+        rcc_draw(1+((HOR_RES/7)*2), 0, HOR_RES/7, VER_RES-1);
+
+        rcc_color(4);
+        rcc_draw(1+((HOR_RES/7)*3), 0, HOR_RES/7, VER_RES-1);
+
+        rcc_color(5);
+        rcc_draw(1+((HOR_RES/7)*4), 0, HOR_RES/7, VER_RES-1);
+
+        rcc_color(6);
+        rcc_draw(1+((HOR_RES/7)*5), 0, HOR_RES/7, VER_RES-1);
+
+        rcc_color(7);
+        rcc_draw(1+((HOR_RES/7)*6), 0, HOR_RES/7, VER_RES-1);
+        
+        // Uncomment to watch a tiny dot fly across the screen
+        //rcc_color(0);                                                         // Change color to Black
+        //fast_pixel(frames%(HOR_RES-1),frames%(VER_RES-1));                    // Draw pixel at a position relative to frame count, totally arbitrary
         
 		drawBorder(0);
         //----------------------------------------------------------------------
         
 		cleanup();                                                              // Housekeeping for VGA signaling
-		waitForBufferFlip();                                                    // For next Vsync
+		waitForBufferFlip();                                                    // Wait for next VSync
 		frames++;                                                               // Increment frame count
+        
 	}
 
 	return 0;
