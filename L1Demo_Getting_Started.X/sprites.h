@@ -43,17 +43,17 @@
 
 struct SpriteInfo
 {
-    uint16_t width;  // Width (in pixels)
-    uint16_t height; // Height (in pixels)
-    uint16_t bitres; // Bits per Pixel
-    uint16_t trans;  // Transparency
-    uint16_t rotate; // Rotation, 0: none, 1: 90 cw, 2: 180, 3: 90 ccw
+    uint16_t width;             // Width (in pixels)
+    uint16_t height;            // Height (in pixels)
+    uint16_t bitres;            // Bits per Pixel
+    uint16_t trans;             // Transparency
+    uint16_t rotate;            // Rotation, 0: none, 1: 90 cw, 2: 180, 3: 90 ccw
     uint16_t color_array[11];   // Color Look Up Table Array
 };
 
 struct Sprite {
     struct SpriteInfo info;
-	__prog__ uint8_t *data;  // Pointer to sprite pixel data
+	__prog__ uint8_t *data;     // Pointer to sprite pixel data
 };
 
 struct Particle
@@ -68,17 +68,14 @@ struct Particle
 
 extern struct Sprite s[MAX_SPRITES];
 
-//extern uint16_t color_array[8];
-
 extern __eds__ struct Particle p[MAX_PARTICLES];
+
 extern int numPart;
 
-void inline loadAllSprites(void);
-void inline loadSpriteCLUT(uint16_t id);
-void inline drawSprite(uint16_t x, uint16_t y, uint16_t id, uint16_t rotation, uint8_t crt);
-int inline nrange(double a, double b);
-void drawSpriteRotation(uint16_t x, uint16_t y, uint16_t id, float rotation);
-void addParticle(void);
-
+void inline sprites_load_all(void);
+void inline sprites_load_clut(uint16_t id);
+void inline sprites_draw(uint16_t x, uint16_t y, uint16_t id, uint16_t rotation, uint8_t crt);
+void inline sprites_draw_angled(uint16_t x, uint16_t y, uint16_t id, float rotation);
+int inline sprites_nrange(double a, double b);
 
 #endif

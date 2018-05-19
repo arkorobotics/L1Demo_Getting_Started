@@ -22,6 +22,7 @@
 #include "color.h"
 #include "music.h"
 #include "sprites.h"
+#include "scene.h"
  
 #define  FCY    16000000UL                                                      // Instruction cycle frequency, Hz
 #include <libpic30.h>
@@ -32,91 +33,54 @@
 
 int main(void) 
 {
-	ANSB = 0x0000;                                                              // Configuration
-	ANSC = 0x0000;
-	ANSD = 0x0000;
-	ANSF = 0x0000;
-	ANSG = 0x0000;
-	TRISB = 0x0000;
+	// Initialize IO
+    ANSB = 0x0000;                                        
+    ANSC = 0x0000;
+    ANSD = 0x0000;
+    ANSF = 0x0000;
+    ANSG = 0x0000;
+    TRISB = 0x0000;
 
-	_VMRGNIF = 0;
-	_VMRGNIE = 1;
-	_GFX1IE = 1;
+    // Initialize GPU
+    gpu_init();
+    gpu_set_res(RES_160x480, DOUBLEBUFFERED, BPP_4);
 
-	config_graphics();                                                          // Configure Graphics, 320 x 480
-	config_clut();                                                              // Configure Color LookUp Table (CLUT)
-	config_chr();                                                               // Configure Font Table
-	config_timer();                                                             // Configure Audio ISR
-	clearbuffers();                                                             // Clear the screen
- 	
- 	uint16_t c0 = 0;                                                            // Black
-	uint16_t c1 = rgb_2_565(180, 180, 180);                                     // Light Grey
-	uint16_t c2 = rgb_2_565(180, 180, 16);                                      // Yellow
-	uint16_t c3 = rgb_2_565(16, 180, 180);                                      // Cyan
-    uint16_t c4 = rgb_2_565(16,180,16);                                         // Green
-    uint16_t c5 = rgb_2_565(180,16,180);                                        // Magenta
-    uint16_t c6 = rgb_2_565(180,16,16);                                         // Red
-    uint16_t c7 = rgb_2_565(16,16,180);                                         // Blue
-    uint16_t c8 = rgb_2_565(235,235,235);                                       // White
-    uint16_t c9 = rgb_2_565(16,16,16);                                          // Light Black
+    gpu_config_clut();                                    // Configure Color LookUp Table (CLUT)
+    gpu_config_chr();                                     // Configure Font Table
+    gpu_clear_all_fb();                                   // Clear the screen
 
- 	clut_set(0, c0);                                                            // Load CLUT
- 	clut_set(1, c1);
- 	clut_set(2, c2);
-    clut_set(3, c3);
-    clut_set(4, c4);  
- 	clut_set(5, c5);
- 	clut_set(6, c6);
-    clut_set(7, c7);
- 	clut_set(8, c8);  
- 	clut_set(9, c9);
-    clut_set(10, c0);
-    clut_set(11, c0);
-    clut_set(12, c0);
-    clut_set(13, c0);
-    clut_set(14, c0);
-    clut_set(15, c0);
+    // Load CLUT
+ 	gpu_clut_set(0, rgb_2_565(0, 0, 0));                                        // Black                                
+ 	gpu_clut_set(1, rgb_2_565(180, 180, 180));                                  // Light Grey
+ 	gpu_clut_set(2, rgb_2_565(180, 180, 16));                                   // Yellow
+    gpu_clut_set(3, rgb_2_565(16, 180, 180));                                   // Cyan
+    gpu_clut_set(4, rgb_2_565(16,180,16));                                      // Green 
+ 	gpu_clut_set(5, rgb_2_565(180,16,180));                                     // Magenta
+ 	gpu_clut_set(6, rgb_2_565(180,16,16));                                      // Red
+    gpu_clut_set(7, rgb_2_565(16,16,180));                                      // Blue
+ 	gpu_clut_set(8, rgb_2_565(235,235,235));                                    // White
+ 	gpu_clut_set(9, rgb_2_565(16,16,16));                                       // Light Black
+    gpu_clut_set(10, rgb_2_565(0, 0, 0));                                       // Black   
+    gpu_clut_set(11, rgb_2_565(0, 0, 0));                                       // Black   
+    gpu_clut_set(12, rgb_2_565(0, 0, 0));                                       // Black   
+    gpu_clut_set(13, rgb_2_565(0, 0, 0));                                       // Black   
+    gpu_clut_set(14, rgb_2_565(0, 0, 0));                                       // Black   
+    gpu_clut_set(15, rgb_2_565(0, 0, 0));                                       // Black   
     
+    // Initialize Audio
+    audio_init();                                         // Configure Audio ISR
+
+    // Initialize Scene Manager
+    scene_init();
+
     // Draw
 	while (1) 
 	{
-		#ifdef DOUBLE_BUFFERED
-			swapBuffers();                                                      // Before drawing the next frame, we must swap buffers
-		#endif
-        
-        //----------------------------------------------------------------------
-        rcc_color(1);                                                           // Change color to Light Grey = c1
-        rcc_draw(1, 0, HOR_RES/7, VER_RES-1);                                   // Draw rectangle starting at x=1, y=0, Width: 1/7*Horizontal Res, Height: Vertical Res - 1
+        scene_render_frame();                             // Draw the scene
 
-        rcc_color(2);
-        rcc_draw(1+((HOR_RES/7)*1), 0, HOR_RES/7, VER_RES-1);
-
-        rcc_color(3);
-        rcc_draw(1+((HOR_RES/7)*2), 0, HOR_RES/7, VER_RES-1);
-
-        rcc_color(4);
-        rcc_draw(1+((HOR_RES/7)*3), 0, HOR_RES/7, VER_RES-1);
-
-        rcc_color(5);
-        rcc_draw(1+((HOR_RES/7)*4), 0, HOR_RES/7, VER_RES-1);
-
-        rcc_color(6);
-        rcc_draw(1+((HOR_RES/7)*5), 0, HOR_RES/7, VER_RES-1);
-
-        rcc_color(7);
-        rcc_draw(1+((HOR_RES/7)*6), 0, HOR_RES/7, VER_RES-1);
-        
-        // Uncomment to watch a tiny dot fly across the screen
-        //rcc_color(0);                                                         // Change color to Black
-        //fast_pixel(frames%(HOR_RES-1),frames%(VER_RES-1));                    // Draw pixel at a position relative to frame count, totally arbitrary
-        
-		drawBorder(0);
-        //----------------------------------------------------------------------
-        
-		cleanup();                                                              // Housekeeping for VGA signaling
-		waitForBufferFlip();                                                    // Wait for next VSync
-		frames++;                                                               // Increment frame count
-        
+        gpu_draw_border(0);                               // Draw black border (cleans up VGA frame)
+        gpu_flip_fb();                                    // Flip buffers at the next Vsync
+        frames++;                                         // Increment frame count
 	}
 
 	return 0;

@@ -22,6 +22,8 @@ Command:
   build/default/production/sprites.o \
   build/default/production/audio.o \
   build/default/production/color.o \
+  build/default/production/alu.o \
+  build/default/production/scene.o \
   --local-stack \
   --defsym=__MPLAB_BUILD=1 \
   -Tp24FJ256DA206.gld.00 \
@@ -61,7 +63,7 @@ Archive member included because of file (symbol)
 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(addsf3.daeo)
                               build/default/production/gpu.o (___subsf3)
 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(cosf.daeo)
-                              build/default/production/gpu.o (_cosf)
+                              build/default/production/sprites.o (_cosf)
 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(divsf3.daeo)
                               build/default/production/gpu.o (___divsf3)
 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(fgtge.daeo)
@@ -71,7 +73,7 @@ Archive member included because of file (symbol)
 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(floatsisf.daeo)
                               build/default/production/sprites.o (___floatsisf)
 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(floatunsisf.daeo)
-                              build/default/production/gpu.o (___floatunsisf)
+                              build/default/production/alu.o (___floatunsisf)
 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(fpack.daeo)
                               /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(addsf3.daeo) (__fpack)
 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(funpack.daeo)
@@ -81,13 +83,15 @@ Archive member included because of file (symbol)
 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(futil.daeo)
                               /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(addsf3.daeo) (__fPropagateNaN)
 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(mulsf3.daeo)
-                              build/default/production/gpu.o (___mulsf3)
+                              build/default/production/sprites.o (___mulsf3)
 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(sincosf.daeo)
                               /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(cosf.daeo) (__sincosf)
 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(sinf.daeo)
-                              build/default/production/gpu.o (_sinf)
-/Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(umodsi3.daeo)
-                              build/default/production/sprites.o (___umodsi3)
+                              build/default/production/sprites.o (_sinf)
+/Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(sqrtf.daeo)
+                              build/default/production/alu.o (_sqrtf)
+/Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(udivsi3.daeo)
+                              build/default/production/gpu.o (___udivsi3)
 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(errno.daeo)
                               /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(sincosf.daeo) (_errno)
 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(fcompare.daeo)
@@ -102,12 +106,6 @@ Archive member included because of file (symbol)
                               /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(sincosf.daeo) (_fmodf)
 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(fmodrem.daeo)
                               /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(fmodf.daeo) (__fmodrem)
-/Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(udivsi3.daeo)
-                              /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(umodsi3.daeo) (___udivsi3)
-/Applications/microchip/xc16/v1.34/bin/bin/../../lib/libc-elf.a(rand.daeo)
-                              build/default/production/gpu.o (_rand)
-/Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(mulsi3.daeo)
-                              /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libc-elf.a(rand.daeo) (___mulsi3)
 
 
 xc16-ld 1.34 (A)
@@ -116,31 +114,33 @@ xc16-ld 1.34 (A)
 
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
-.text                        0x200               0x6e8           0xa5c  (2652)
-.const                       0x8e8               0x3fc           0x5fa  (1530)
-_0131ac385ad57147            0xce4              0x94d4          0xdf3e  (57150)
-_0122278c5ad5630e           0xa1b8               0xb3a          0x10d7  (4311)
-.dinit                      0xacf2               0x840           0xc60  (3168)
-.text                       0xb532               0xf64          0x1716  (5910)
-_0131abdc5ad57147           0xc496                0x80            0xc0  (192)
-.init.delay32               0xc516                0x1c            0x2a  (42)
-.text                       0xc532                0x2e            0x45  (69)
+.text                        0x200               0x6c4           0xa26  (2598)
+.const                       0x8c4               0x400           0x600  (1536)
+_014b1c945b00a0b5            0xcc4              0x94d4          0xdf3e  (57150)
+_012229b45b00a0b4           0xa198              0x3ece          0x5e35  (24117)
+_01222a105b00a0b4           0xe066              0x38da          0x5547  (21831)
+_01222a6c5b00a0b4          0x11940              0x26dc          0x3a4a  (14922)
+.dinit                     0x1401c               0x84c           0xc72  (3186)
+.text                      0x14868              0x1408          0x1e0c  (7692)
+_014b1c385b00a0b5          0x15c70                0x80            0xc0  (192)
+.init.delay32              0x15cf0                0x1c            0x2a  (42)
+.text                      0x15d0c                0x16            0x21  (33)
 
-                 Total "program" memory used (bytes):        0x12510  (75024) 28%
+                 Total "program" memory used (bytes):        0x208b3  (133299) 50%
 
 
 "data" Memory  [Origin = 0x800, Length = 0x18000]
 
 section                    address      alignment gaps    total length  (dec)
 -------                    -------      --------------    -------------------
-.nbss                        0x800                   0            0x14  (20)
-.ndata                       0x814                   0             0x2  (2)
-.nbss                        0x816                   0             0x4  (4)
-.bss                         0x81a                   0           0x310  (784)
+.nbss                        0x800                   0            0x24  (36)
+.ndata                       0x824                   0             0x2  (2)
+.nbss                        0x826                   0             0x2  (2)
+.bss                         0x828                   0           0x3c2  (962)
 FONTS                       0x4ff8                   0           0xc08  (3080)
 DISPLAY                     0x5c00                   0         0x12c00  (76800)
 
-                 Total "data" memory used (bytes):        0x13b32  (80690) 82%
+                 Total "data" memory used (bytes):        0x13bf2  (80882) 82%
 
 
 Dynamic Memory Usage
@@ -148,22 +148,28 @@ Dynamic Memory Usage
 region                     address                      maximum length  (dec)
 ------                     -------                      ---------------------
 heap                             0                                   0  (0)
-stack                        0xb2a                              0x44ce  (17614)
+stack                        0xbea                              0x440e  (17422)
 
-                 Maximum dynamic memory (bytes):         0x44ce  (17614)
+                 Maximum dynamic memory (bytes):         0x440e  (17422)
 
 
 External Symbols in Data Memory (by address):
 
-                    0x0800                  _frames
-                    0x0802                  _fb_ready
-                    0x0804                  _vsync
-                    0x0806                  _next_fb
-                    0x0814                  _maxCharHeight
-                    0x0816                  _numPart
-                    0x081a                  _color_array
-                    0x0830                  _s
-                    0x09bc                  _p
+                    0x0800                  _ch1_val
+                    0x0802                  _ch2_val
+                    0x0804                  _ch3_val
+                    0x0806                  _time_sec
+                    0x080a                  _time_subsec
+                    0x0818                  _frames
+                    0x0820                  _scene_func
+                    0x0828                  _color_array
+                    0x083e                  _s
+                    0x09ca                  _p
+                    0x0b32                  _inputMatrix
+                    0x0b42                  _outputMatrix
+                    0x0b52                  _rotationMatrix
+                    0x0b92                  _gfx
+                    0x0bc6                  _scene
                     0x4ff8                  _FontStart
                     0x5c00                  _GFXDisplayBuffer
 
@@ -171,15 +177,21 @@ External Symbols in Data Memory (by name):
 
                     0x4ff8                  _FontStart
                     0x5c00                  _GFXDisplayBuffer
-                    0x081a                  _color_array
-                    0x0802                  _fb_ready
-                    0x0800                  _frames
-                    0x0814                  _maxCharHeight
-                    0x0806                  _next_fb
-                    0x0816                  _numPart
-                    0x09bc                  _p
-                    0x0830                  _s
-                    0x0804                  _vsync
+                    0x0800                  _ch1_val
+                    0x0802                  _ch2_val
+                    0x0804                  _ch3_val
+                    0x0828                  _color_array
+                    0x0818                  _frames
+                    0x0b92                  _gfx
+                    0x0b32                  _inputMatrix
+                    0x0b42                  _outputMatrix
+                    0x09ca                  _p
+                    0x0b52                  _rotationMatrix
+                    0x083e                  _s
+                    0x0bc6                  _scene
+                    0x0820                  _scene_func
+                    0x0806                  _time_sec
+                    0x080a                  _time_subsec
 
 External Symbols in Program Memory (by address):
 
@@ -187,157 +199,153 @@ External Symbols in Program Memory (by address):
                   0x00023c                  __psv_init
                   0x000252                  __data_init
                   0x000252                  __data_init_da
-                  0x000304                  __GFX1Interrupt
-                  0x000330                  __T1Interrupt
-                  0x0003aa                  __DefaultInterrupt
-                  0x0003b0                  ___subsf3
-                  0x0003b2                  ___addsf3
-                  0x00046c                  _cosf
-                  0x000470                  ___divsf3
-                  0x0004f4                  ___gtsf2
-                  0x0004f4                  ___gesf2
-                  0x0004f8                  ___fixsfsi
-                  0x00053a                  ___floatsisf
-                  0x000540                  ___floatunsisf
-                  0x000544                  __fpack
-                  0x000590                  __funpack
-                  0x0005ba                  __funpack2
-                  0x0005ca                  __fPropagateNaN
-                  0x0005dc                  __fbopExit
-                  0x0005e4                  __fbopReturnNaN
-                  0x0005ea                  ___mulsf3
-                  0x000652                  __sincosf
-                  0x000724                  _sinf
-                  0x000728                  ___umodsi3
-                  0x00072e                  __fcompare
-                  0x000764                  ___ltsf2
-                  0x000764                  ___eqsf2
-                  0x000764                  ___lesf2
-                  0x000768                  ___floatdisf
-                  0x000788                  ___floatundisf
-                  0x0007e6                  _fmodf
-                  0x0007ea                  __fmodrem
-                  0x000888                  ___udivsi3
-                  0x0008a8                  _srand
-                  0x0008b6                  _rand
-                  0x0008dc                  ___mulp32eds3
-                  0x0008dc                  ___mulsi3
-                  0x0008dc                  ___mulp32peds3
-                  0x000ce4                  _SpriteMap
-                  0x00b532                  _config_graphics
-                  0x00b5f2                  _getHsync
-                  0x00b5f6                  _config_clut
-                  0x00b5fa                  _clut_set
-                  0x00b608                  _config_chr
-                  0x00b64a                  _chr_print
-                  0x00b692                  _rcc_color
-                  0x00b69e                  _chr_fg_color
-                  0x00b6a6                  _chr_bg_color
-                  0x00b6ae                  _rcc_setdest
-                  0x00b6bc                  _gpu_setfb
-                  0x00b6c2                  _waitForBufferFlip
-                  0x00b6e8                  _rcc_draw
-                  0x00b726                  _fast_pixel
-                  0x00b754                  _blank_background
-                  0x00b760                  _swapBuffers
-                  0x00b7ae                  _drawBorder
-                  0x00b7d4                  _cleanup
-                  0x00b7e2                  _clearbuffers
-                  0x00b7e4                  _radians
-                  0x00b7fa                  _realtoint
-                  0x00b84c                  _drawLineS
-                  0x00b84e                  _line
-                  0x00b930                  _render
-                  0x00bcc4                  _loadAllSprites
-                  0x00be44                  _loadSpriteCLUT
-                  0x00be66                  _drawSprite
-                  0x00bfc2                  _nrange
-                  0x00bff2                  _drawSpriteRotation
-                  0x00c166                  _addParticle
-                  0x00c2ea                  _main
-                  0x00c496                  _SpriteInfoMap
-                  0x00c516                  ___delay32
-                  0x00c532                  _config_timer
-                  0x00c54a                  _rgb_2_565
+                  0x00030c                  __GFX1Interrupt
+                  0x000338                  __T1Interrupt
+                  0x000362                  __DefaultInterrupt
+                  0x000368                  ___subsf3
+                  0x00036a                  ___addsf3
+                  0x000424                  _cosf
+                  0x000428                  ___divsf3
+                  0x0004ac                  ___gtsf2
+                  0x0004ac                  ___gesf2
+                  0x0004b0                  ___fixsfsi
+                  0x0004f2                  ___floatsisf
+                  0x0004f8                  ___floatunsisf
+                  0x0004fc                  __fpack
+                  0x000548                  __funpack
+                  0x000572                  __funpack2
+                  0x000582                  __fPropagateNaN
+                  0x000594                  __fbopExit
+                  0x00059c                  __fbopReturnNaN
+                  0x0005a2                  ___mulsf3
+                  0x00060a                  __sincosf
+                  0x0006dc                  _sinf
+                  0x0006e0                  _sqrtf
+                  0x00074a                  ___udivsi3
+                  0x00076a                  __fcompare
+                  0x0007a0                  ___lesf2
+                  0x0007a0                  ___ltsf2
+                  0x0007a0                  ___eqsf2
+                  0x0007a4                  ___floatdisf
+                  0x0007c4                  ___floatundisf
+                  0x000822                  _fmodf
+                  0x000826                  __fmodrem
+                  0x000cc4                  _SpriteMap
+                  0x014868                  _gpu_init
+                  0x014870                  _gpu_config
+                  0x0149dc                  _gpu_set_res
+                  0x014c10                  _gpu_set_fb
+                  0x014c16                  _gpu_config_clut
+                  0x014c1a                  _gpu_clut_set
+                  0x014c28                  _gpu_config_chr
+                  0x014c88                  _gpu_chr_print
+                  0x014cd4                  _gpu_chr_fg_color
+                  0x014cdc                  _gpu_chr_bg_color
+                  0x014ce4                  _rcc_set_fb_dest
+                  0x014cf2                  _gpu_flip_fb
+                  0x014d84                  _rcc_color
+                  0x014d8c                  _rcc_rec
+                  0x014dda                  _gpu_draw_border
+                  0x014e24                  _gpu_clear_fb
+                  0x014e38                  _gpu_clear_all_fb
+                  0x014e6c                  _rcc_pixel
+                  0x014ea8                  _rcc_line
+                  0x014f8a                  _sprites_load_all
+                  0x01510a                  _sprites_load_clut
+                  0x01512c                  _sprites_draw
+                  0x0152ee                  _sprites_nrange
+                  0x01531e                  _sprites_draw_angled
+                  0x0154b6                  _radians
+                  0x0154cc                  _realtoint
+                  0x01551e                  _alu_rot
+                  0x015592                  _alu_calc_rot_matrix
+                  0x0157ca                  _scene_one
+                  0x0157e6                  _scene_zero
+                  0x015946                  _scene_init
+                  0x015988                  _scene_render_frame
+                  0x0159f2                  _main
+                  0x015b5c                  _audio_init
+                  0x015b7c                  _audio_isr
+                  0x015c70                  _SpriteInfoMap
+                  0x015cf0                  ___delay32
+                  0x015d0c                  _rgb_2_565
 
 External Symbols in Program Memory (by name):
 
-                  0x00c496                  _SpriteInfoMap
-                  0x000ce4                  _SpriteMap
-                  0x0003aa                  __DefaultInterrupt
-                  0x000304                  __GFX1Interrupt
-                  0x000330                  __T1Interrupt
-                  0x0003b2                  ___addsf3
-                  0x00c516                  ___delay32
-                  0x000470                  ___divsf3
-                  0x000764                  ___eqsf2
-                  0x0004f8                  ___fixsfsi
-                  0x000768                  ___floatdisf
-                  0x00053a                  ___floatsisf
-                  0x000788                  ___floatundisf
-                  0x000540                  ___floatunsisf
-                  0x0004f4                  ___gesf2
-                  0x0004f4                  ___gtsf2
-                  0x000764                  ___lesf2
-                  0x000764                  ___ltsf2
-                  0x0008dc                  ___mulp32eds3
-                  0x0008dc                  ___mulp32peds3
-                  0x0005ea                  ___mulsf3
-                  0x0008dc                  ___mulsi3
-                  0x0003b0                  ___subsf3
-                  0x000888                  ___udivsi3
-                  0x000728                  ___umodsi3
+                  0x015c70                  _SpriteInfoMap
+                  0x000cc4                  _SpriteMap
+                  0x000362                  __DefaultInterrupt
+                  0x00030c                  __GFX1Interrupt
+                  0x000338                  __T1Interrupt
+                  0x00036a                  ___addsf3
+                  0x015cf0                  ___delay32
+                  0x000428                  ___divsf3
+                  0x0007a0                  ___eqsf2
+                  0x0004b0                  ___fixsfsi
+                  0x0007a4                  ___floatdisf
+                  0x0004f2                  ___floatsisf
+                  0x0007c4                  ___floatundisf
+                  0x0004f8                  ___floatunsisf
+                  0x0004ac                  ___gesf2
+                  0x0004ac                  ___gtsf2
+                  0x0007a0                  ___lesf2
+                  0x0007a0                  ___ltsf2
+                  0x0005a2                  ___mulsf3
+                  0x000368                  ___subsf3
+                  0x00074a                  ___udivsi3
                   0x000252                  __data_init
                   0x000252                  __data_init_da
-                  0x0005ca                  __fPropagateNaN
-                  0x0005dc                  __fbopExit
-                  0x0005e4                  __fbopReturnNaN
-                  0x00072e                  __fcompare
-                  0x0007ea                  __fmodrem
-                  0x000544                  __fpack
-                  0x000590                  __funpack
-                  0x0005ba                  __funpack2
+                  0x000582                  __fPropagateNaN
+                  0x000594                  __fbopExit
+                  0x00059c                  __fbopReturnNaN
+                  0x00076a                  __fcompare
+                  0x000826                  __fmodrem
+                  0x0004fc                  __fpack
+                  0x000548                  __funpack
+                  0x000572                  __funpack2
                   0x00023c                  __psv_init
                   0x000200                  __resetPRI
-                  0x000652                  __sincosf
-                  0x00c166                  _addParticle
-                  0x00b754                  _blank_background
-                  0x00b6a6                  _chr_bg_color
-                  0x00b69e                  _chr_fg_color
-                  0x00b64a                  _chr_print
-                  0x00b7d4                  _cleanup
-                  0x00b7e2                  _clearbuffers
-                  0x00b5fa                  _clut_set
-                  0x00b608                  _config_chr
-                  0x00b5f6                  _config_clut
-                  0x00b532                  _config_graphics
-                  0x00c532                  _config_timer
-                  0x00046c                  _cosf
-                  0x00b7ae                  _drawBorder
-                  0x00b84c                  _drawLineS
-                  0x00be66                  _drawSprite
-                  0x00bff2                  _drawSpriteRotation
-                  0x00b726                  _fast_pixel
-                  0x0007e6                  _fmodf
-                  0x00b5f2                  _getHsync
-                  0x00b6bc                  _gpu_setfb
-                  0x00b84e                  _line
-                  0x00bcc4                  _loadAllSprites
-                  0x00be44                  _loadSpriteCLUT
-                  0x00c2ea                  _main
-                  0x00bfc2                  _nrange
-                  0x00b7e4                  _radians
-                  0x0008b6                  _rand
-                  0x00b692                  _rcc_color
-                  0x00b6e8                  _rcc_draw
-                  0x00b6ae                  _rcc_setdest
-                  0x00b7fa                  _realtoint
-                  0x00b930                  _render
-                  0x00c54a                  _rgb_2_565
-                  0x000724                  _sinf
-                  0x0008a8                  _srand
-                  0x00b760                  _swapBuffers
-                  0x00b6c2                  _waitForBufferFlip
+                  0x00060a                  __sincosf
+                  0x015592                  _alu_calc_rot_matrix
+                  0x01551e                  _alu_rot
+                  0x015b5c                  _audio_init
+                  0x015b7c                  _audio_isr
+                  0x000424                  _cosf
+                  0x000822                  _fmodf
+                  0x014cdc                  _gpu_chr_bg_color
+                  0x014cd4                  _gpu_chr_fg_color
+                  0x014c88                  _gpu_chr_print
+                  0x014e38                  _gpu_clear_all_fb
+                  0x014e24                  _gpu_clear_fb
+                  0x014c1a                  _gpu_clut_set
+                  0x014870                  _gpu_config
+                  0x014c28                  _gpu_config_chr
+                  0x014c16                  _gpu_config_clut
+                  0x014dda                  _gpu_draw_border
+                  0x014cf2                  _gpu_flip_fb
+                  0x014868                  _gpu_init
+                  0x014c10                  _gpu_set_fb
+                  0x0149dc                  _gpu_set_res
+                  0x0159f2                  _main
+                  0x0154b6                  _radians
+                  0x014d84                  _rcc_color
+                  0x014ea8                  _rcc_line
+                  0x014e6c                  _rcc_pixel
+                  0x014d8c                  _rcc_rec
+                  0x014ce4                  _rcc_set_fb_dest
+                  0x0154cc                  _realtoint
+                  0x015d0c                  _rgb_2_565
+                  0x015946                  _scene_init
+                  0x0157ca                  _scene_one
+                  0x015988                  _scene_render_frame
+                  0x0157e6                  _scene_zero
+                  0x0006dc                  _sinf
+                  0x01512c                  _sprites_draw
+                  0x01531e                  _sprites_draw_angled
+                  0x014f8a                  _sprites_load_all
+                  0x01510a                  _sprites_load_clut
+                  0x0152ee                  _sprites_nrange
+                  0x0006e0                  _sqrtf
 
 Memory Configuration
 
@@ -362,6 +370,8 @@ LOAD build/default/production/gpu.o
 LOAD build/default/production/sprites.o
 LOAD build/default/production/audio.o
 LOAD build/default/production/color.o
+LOAD build/default/production/alu.o
+LOAD build/default/production/scene.o
                     0x0001                  __MPLAB_BUILD = 0x1
 LOAD pPIC24Fxxx
 LOAD /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libfx-elf.a
@@ -382,7 +392,7 @@ LOAD /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libfx-elf.a
                   0x000002          0x2 SHORT 0x0 ((ABSOLUTE (__reset) >> 0x10) & 0x7f)
                   0x000003          0x2 SHORT 0x0
 
-.text             0x000200        0x6e8
+.text             0x000200        0x6c4
  *(.init)
  .init            0x000200         0x4c /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libpic30-elf.a(crt0_extended24.o)
                   0x000200                  __reset
@@ -393,90 +403,83 @@ LOAD /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libfx-elf.a
                   0x000252                  __data_init
  *(.user_init)
  *(.handle)
+ .handle          0x000304          0x8 jump_table
  *(.isr*)
- .isr.text        0x000304         0x2c build/default/production/gpu.o
-                  0x000304                  __GFX1Interrupt
- .isr.text        0x000330         0x7a build/default/production/audio.o
-                  0x000330                  __T1Interrupt
- .isr             0x0003aa          0x4 default_isr
-                  0x0003aa                  __DefaultInterrupt
+ .isr.text        0x00030c         0x2c build/default/production/gpu.o
+                  0x00030c                  __GFX1Interrupt
+ .isr.text        0x000338         0x2a build/default/production/audio.o
+                  0x000338                  __T1Interrupt
+ .isr             0x000362          0x4 default_isr
+                  0x000362                  __DefaultInterrupt
  *(.libc)
  *(.libm)
  *(.libdsp)
  *(.lib*)
  .libpic30_crt_start_mode
-                  0x0003ae          0x2 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libpic30-elf.a(crt_start_mode_normalda.eo)
-                  0x0003ae                  __crt_start_mode_normal
-                  0x0003ae                  __crt_start_mode
- .libm.subsf3     0x0003b0         0xbc /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(addsf3.daeo)
-                  0x0003b0                  ___subsf3
-                  0x0003b2                  ___addsf3
- .libm.cosf       0x00046c          0x4 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(cosf.daeo)
-                  0x00046c                  _cosf
- .libm.divfs3     0x000470         0x84 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(divsf3.daeo)
-                  0x000470                  ___divsf3
- .libm.gtsf2      0x0004f4          0x4 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(fgtge.daeo)
-                  0x0004f4                  ___gtsf2
-                  0x0004f4                  ___gesf2
- .libm.fixsfsi    0x0004f8         0x42 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(fixsfsi.daeo)
-                  0x0004f8                  _(float, int, long long, short, float, short, int)
+                  0x000366          0x2 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libpic30-elf.a(crt_start_mode_normalda.eo)
+                  0x000366                  __crt_start_mode_normal
+                  0x000366                  __crt_start_mode
+ .libm.subsf3     0x000368         0xbc /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(addsf3.daeo)
+                  0x000368                  ___subsf3
+                  0x00036a                  ___addsf3
+ .libm.cosf       0x000424          0x4 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(cosf.daeo)
+                  0x000424                  _cosf
+ .libm.divfs3     0x000428         0x84 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(divsf3.daeo)
+                  0x000428                  ___divsf3
+ .libm.gtsf2      0x0004ac          0x4 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(fgtge.daeo)
+                  0x0004ac                  ___gtsf2
+                  0x0004ac                  ___gesf2
+ .libm.fixsfsi    0x0004b0         0x42 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(fixsfsi.daeo)
+                  0x0004b0                  _(float, int, long long, short, float, short, int)
  .libm.floatsisf
-                  0x00053a          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(floatsisf.daeo)
-                  0x00053a                  ___floatsisf
+                  0x0004f2          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(floatsisf.daeo)
+                  0x0004f2                  ___floatsisf
  .libm.floatunsisf
-                  0x000540          0x4 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(floatunsisf.daeo)
-                  0x000540                  ___floatunsisf
- .libm.fpack      0x000544         0x4c /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(fpack.daeo)
-                  0x000544                  __fpack
- .libm.funpack    0x000590         0x2a /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(funpack.daeo)
-                  0x000590                  __funpack
+                  0x0004f8          0x4 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(floatunsisf.daeo)
+                  0x0004f8                  ___floatunsisf
+ .libm.fpack      0x0004fc         0x4c /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(fpack.daeo)
+                  0x0004fc                  __fpack
+ .libm.funpack    0x000548         0x2a /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(funpack.daeo)
+                  0x000548                  __funpack
  .libm.funpack2
-                  0x0005ba         0x10 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(funpack2.daeo)
-                  0x0005ba                  __funpack2
+                  0x000572         0x10 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(funpack2.daeo)
+                  0x000572                  __funpack2
  .libm.fPropagateNaN
-                  0x0005ca         0x12 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(futil.daeo)
-                  0x0005ca                  __fPropagateNaN
+                  0x000582         0x12 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(futil.daeo)
+                  0x000582                  __fPropagateNaN
  .libm.fbobExit
-                  0x0005dc          0x8 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(futil.daeo)
-                  0x0005dc                  __fbopExit
+                  0x000594          0x8 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(futil.daeo)
+                  0x000594                  __fbopExit
  .libm.fbopReturnNaN
-                  0x0005e4          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(futil.daeo)
-                  0x0005e4                  __fbopReturnNaN
- .libm.mulsf3     0x0005ea         0x68 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(mulsf3.daeo)
-                  0x0005ea                  ___mulsf3
- .libm.sincosf    0x000652         0xd2 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(sincosf.daeo)
-                  0x000652                  __sincosf
- .libm.sinf       0x000724          0x4 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(sinf.daeo)
-                  0x000724                  _sinf
- .libm.umodsi3    0x000728          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(umodsi3.daeo)
-                  0x000728                  ___umodsi3
+                  0x00059c          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(futil.daeo)
+                  0x00059c                  __fbopReturnNaN
+ .libm.mulsf3     0x0005a2         0x68 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(mulsf3.daeo)
+                  0x0005a2                  ___mulsf3
+ .libm.sincosf    0x00060a         0xd2 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(sincosf.daeo)
+                  0x00060a                  __sincosf
+ .libm.sinf       0x0006dc          0x4 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(sinf.daeo)
+                  0x0006dc                  _sinf
+ .libm.sqrtf      0x0006e0         0x6a /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(sqrtf.daeo)
+                  0x0006e0                  _sqrtf
+ .libm.udivsi3    0x00074a         0x20 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(udivsi3.daeo)
+                  0x00074a                  ___udivsi3
  .libm.fcompare
-                  0x00072e         0x36 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(fcompare.daeo)
-                  0x00072e                  __fcompare
- .libm.eqsf2      0x000764          0x4 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(feqltle.daeo)
-                  0x000764                  ___lesf2
-                  0x000764                  ___eqsf2
-                  0x000764                  ___ltsf2
+                  0x00076a         0x36 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(fcompare.daeo)
+                  0x00076a                  __fcompare
+ .libm.eqsf2      0x0007a0          0x4 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(feqltle.daeo)
+                  0x0007a0                  ___lesf2
+                  0x0007a0                  ___eqsf2
+                  0x0007a0                  ___ltsf2
  .libm.floatdisf
-                  0x000768         0x20 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(floatdisf.daeo)
-                  0x000768                  ___floatdisf
+                  0x0007a4         0x20 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(floatdisf.daeo)
+                  0x0007a4                  ___floatdisf
  .libm.floatundisf
-                  0x000788         0x5e /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(floatundisf.daeo)
-                  0x000788                  ___floatundisf
- .libm.fmodf      0x0007e6          0x4 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(fmodf.daeo)
-                  0x0007e6                  _fmodf
- .libm.fmodrem    0x0007ea         0x9e /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(fmodrem.daeo)
-                  0x0007ea                  __fmodrem
- .libm.udivsi3    0x000888         0x20 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(udivsi3.daeo)
-                  0x000888                  ___udivsi3
- .libc.srand      0x0008a8          0xe /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libc-elf.a(rand.daeo)
-                  0x0008a8                  _srand
- .libc.rand       0x0008b6         0x26 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libc-elf.a(rand.daeo)
-                  0x0008b6                  _rand
- .libm.mulsi3     0x0008dc          0xc /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(mulsi3.daeo)
-                  0x0008dc                  ___mulp32eds3
-                  0x0008dc                  ___mulp32peds3
-                  0x0008dc                  ___mulsi3
+                  0x0007c4         0x5e /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(floatundisf.daeo)
+                  0x0007c4                  ___floatundisf
+ .libm.fmodf      0x000822          0x4 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(fmodf.daeo)
+                  0x000822                  _fmodf
+ .libm.fmodrem    0x000826         0x9e /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(fmodrem.daeo)
+                  0x000826                  __fmodrem
 
 usercode
  *(usercode)
@@ -496,48 +499,57 @@ __CONFIG1
 .comment
  *(.comment)
 
-.debug_info       0x000000       0x4181
+.debug_info       0x000000       0x4c05
  *(.debug_info)
- .debug_info      0x000000        0x5b7 build/default/production/main.o
- .debug_info      0x0005b7        0x17a build/default/production/music.o
- .debug_info      0x000731       0x2a29 build/default/production/gpu.o
- .debug_info      0x00315a        0x627 build/default/production/sprites.o
- .debug_info      0x003781        0x81e build/default/production/audio.o
- .debug_info      0x003f9f        0x1e2 build/default/production/color.o
+ .debug_info      0x000000        0x3e6 build/default/production/main.o
+ .debug_info      0x0003e6        0x1ef build/default/production/music.o
+ .debug_info      0x0005d5       0x2a05 build/default/production/gpu.o
+ .debug_info      0x002fda        0x711 build/default/production/sprites.o
+ .debug_info      0x0036eb        0x972 build/default/production/audio.o
+ .debug_info      0x00405d        0x1e2 build/default/production/color.o
+ .debug_info      0x00423f        0x3d8 build/default/production/alu.o
+ .debug_info      0x004617        0x5ee build/default/production/scene.o
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev     0x000000        0x654
+.debug_abbrev     0x000000        0x802
  *(.debug_abbrev)
- .debug_abbrev    0x000000         0xee build/default/production/main.o
- .debug_abbrev    0x0000ee         0x45 build/default/production/music.o
- .debug_abbrev    0x000133        0x255 build/default/production/gpu.o
- .debug_abbrev    0x000388        0x153 build/default/production/sprites.o
- .debug_abbrev    0x0004db        0x11a build/default/production/audio.o
- .debug_abbrev    0x0005f5         0x5f build/default/production/color.o
+ .debug_abbrev    0x000000         0xa8 build/default/production/main.o
+ .debug_abbrev    0x0000a8         0x45 build/default/production/music.o
+ .debug_abbrev    0x0000ed        0x24d build/default/production/gpu.o
+ .debug_abbrev    0x00033a        0x134 build/default/production/sprites.o
+ .debug_abbrev    0x00046e        0x155 build/default/production/audio.o
+ .debug_abbrev    0x0005c3         0x5f build/default/production/color.o
+ .debug_abbrev    0x000622         0xbb build/default/production/alu.o
+ .debug_abbrev    0x0006dd        0x125 build/default/production/scene.o
 
-.debug_line       0x000000        0x60e
+.debug_line       0x000000        0x7f3
  *(.debug_line)
- .debug_line      0x000000        0x127 build/default/production/main.o
- .debug_line      0x000127         0x25 build/default/production/music.o
- .debug_line      0x00014c        0x1fc build/default/production/gpu.o
- .debug_line      0x000348        0x13e build/default/production/sprites.o
- .debug_line      0x000486        0x109 build/default/production/audio.o
- .debug_line      0x00058f         0x7f build/default/production/color.o
+ .debug_line      0x000000        0x11c build/default/production/main.o
+ .debug_line      0x00011c         0x25 build/default/production/music.o
+ .debug_line      0x000141        0x22c build/default/production/gpu.o
+ .debug_line      0x00036d        0x13a build/default/production/sprites.o
+ .debug_line      0x0004a7        0x11e build/default/production/audio.o
+ .debug_line      0x0005c5         0x7f build/default/production/color.o
+ .debug_line      0x000644         0xc6 build/default/production/alu.o
+ .debug_line      0x00070a         0xe9 build/default/production/scene.o
 
-.debug_frame      0x000000        0x448
+.debug_frame      0x000000        0x4c8
  *(.debug_frame)
- .debug_frame     0x000000         0x50 build/default/production/main.o
- .debug_frame     0x000050        0x256 build/default/production/gpu.o
- .debug_frame     0x0002a6        0x12a build/default/production/sprites.o
- .debug_frame     0x0003d0         0x54 build/default/production/audio.o
- .debug_frame     0x000424         0x24 build/default/production/color.o
+ .debug_frame     0x000000         0x24 build/default/production/main.o
+ .debug_frame     0x000024        0x1f0 build/default/production/gpu.o
+ .debug_frame     0x000214        0x104 build/default/production/sprites.o
+ .debug_frame     0x000318         0x6e build/default/production/audio.o
+ .debug_frame     0x000386         0x24 build/default/production/color.o
+ .debug_frame     0x0003aa         0x9c build/default/production/alu.o
+ .debug_frame     0x000446         0x82 build/default/production/scene.o
 
-.debug_str        0x000000        0x1be
+.debug_str        0x000000        0x1ef
  *(.debug_str)
- .debug_str       0x000000         0x1b build/default/production/main.o
- .debug_str       0x00001b        0x151 build/default/production/gpu.o
- .debug_str       0x00016c         0x2d build/default/production/sprites.o
- .debug_str       0x000199         0x25 build/default/production/audio.o
+ .debug_str       0x000000        0x14c build/default/production/gpu.o
+ .debug_str       0x00014c         0x2d build/default/production/sprites.o
+ .debug_str       0x000179         0x3a build/default/production/audio.o
+ .debug_str       0x0001b3         0x28 build/default/production/alu.o
+ .debug_str       0x0001db         0x14 build/default/production/scene.o
 
 .debug_loc
  *(.debug_loc)
@@ -546,23 +558,27 @@ __CONFIG1
  *(.debug_macinfo)
 
 .debug_pubnames
-                  0x000000        0x320
+                  0x000000        0x400
  *(.debug_pubnames)
  .debug_pubnames
                   0x000000         0x1b build/default/production/main.o
  .debug_pubnames
-                  0x00001b        0x1f0 build/default/production/gpu.o
+                  0x00001b        0x19d build/default/production/gpu.o
  .debug_pubnames
-                  0x00020b         0xc1 build/default/production/sprites.o
+                  0x0001b8         0xb5 build/default/production/sprites.o
  .debug_pubnames
-                  0x0002cc         0x34 build/default/production/audio.o
+                  0x00026d         0x81 build/default/production/audio.o
  .debug_pubnames
-                  0x000300         0x20 build/default/production/color.o
+                  0x0002ee         0x20 build/default/production/color.o
+ .debug_pubnames
+                  0x00030e         0x84 build/default/production/alu.o
+ .debug_pubnames
+                  0x000392         0x6e build/default/production/scene.o
 
 .debug_ranges
  *(.debug_ranges)
 
-.debug_aranges    0x000000         0x78
+.debug_aranges    0x000000         0xa8
  *(.debug_aranges)
  .debug_aranges
                   0x000000         0x18 build/default/production/main.o
@@ -574,6 +590,10 @@ __CONFIG1
                   0x000048         0x18 build/default/production/audio.o
  .debug_aranges
                   0x000060         0x18 build/default/production/color.o
+ .debug_aranges
+                  0x000078         0x18 build/default/production/alu.o
+ .debug_aranges
+                  0x000090         0x18 build/default/production/scene.o
                     0x0000                  WREG0 = 0x0
                     0x0000                  _WREG0 = 0x0
                     0x0002                  WREG1 = 0x2
@@ -1817,119 +1837,132 @@ LOAD /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a
 LOAD /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libc-elf.a
 END GROUP
 OUTPUT(dist/default/production/L1Demo_Getting_Started.X.production.elf elf32-pic30)
+LOAD jump_table
 LOAD default_isr
 LOAD data_init
 
 .debug_pubtypes
-                  0x000078        0x47f
+                  0x0000a8        0x555
  .debug_pubtypes
-                  0x000078         0x76 build/default/production/main.o
+                  0x0000a8         0x2c build/default/production/main.o
  .debug_pubtypes
-                  0x0000ee         0x12 build/default/production/music.o
+                  0x0000d4         0x12 build/default/production/music.o
  .debug_pubtypes
-                  0x000100        0x2e5 build/default/production/gpu.o
+                  0x0000e6        0x33f build/default/production/gpu.o
  .debug_pubtypes
-                  0x0003e5         0x52 build/default/production/sprites.o
+                  0x000425         0x6d build/default/production/sprites.o
  .debug_pubtypes
-                  0x000437         0x95 build/default/production/audio.o
+                  0x000492         0xa2 build/default/production/audio.o
  .debug_pubtypes
-                  0x0004cc         0x2b build/default/production/color.o
+                  0x000534         0x2b build/default/production/color.o
+ .debug_pubtypes
+                  0x00055f         0x1f build/default/production/alu.o
+ .debug_pubtypes
+                  0x00057e         0x7f build/default/production/scene.o
 
 __c30_signature
-                  0x0004f7         0xcc
+                  0x0005fd         0xcc
  __c30_signature
-                  0x0004f7          0x6 build/default/production/main.o
+                  0x0005fd          0x6 build/default/production/main.o
  __c30_signature
-                  0x0004fd          0x6 build/default/production/music.o
+                  0x000603          0x6 build/default/production/music.o
  __c30_signature
-                  0x000503          0x6 build/default/production/gpu.o
+                  0x000609          0x6 build/default/production/gpu.o
  __c30_signature
-                  0x000509          0x6 build/default/production/sprites.o
+                  0x00060f          0x6 build/default/production/sprites.o
  __c30_signature
-                  0x00050f          0x6 build/default/production/audio.o
+                  0x000615          0x6 build/default/production/audio.o
  __c30_signature
-                  0x000515          0x6 build/default/production/color.o
+                  0x00061b          0x6 build/default/production/color.o
  __c30_signature
-                  0x00051b          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libpic30-elf.a(crt0_extended24.o)
+                  0x000621          0x6 build/default/production/alu.o
  __c30_signature
-                  0x000521          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libpic30-elf.a(data_init_24.o)
+                  0x000627          0x6 build/default/production/scene.o
  __c30_signature
-                  0x000527          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libpic30-elf.a(delay32da.eo)
+                  0x00062d          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libpic30-elf.a(crt0_extended24.o)
  __c30_signature
-                  0x00052d          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(addsf3.daeo)
+                  0x000633          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libpic30-elf.a(data_init_24.o)
  __c30_signature
-                  0x000533          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(cosf.daeo)
+                  0x000639          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libpic30-elf.a(delay32da.eo)
  __c30_signature
-                  0x000539          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(divsf3.daeo)
+                  0x00063f          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(addsf3.daeo)
  __c30_signature
-                  0x00053f          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(fgtge.daeo)
+                  0x000645          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(cosf.daeo)
  __c30_signature
-                  0x000545          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(fixsfsi.daeo)
+                  0x00064b          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(divsf3.daeo)
  __c30_signature
-                  0x00054b          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(floatsisf.daeo)
+                  0x000651          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(fgtge.daeo)
  __c30_signature
-                  0x000551          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(floatunsisf.daeo)
+                  0x000657          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(fixsfsi.daeo)
  __c30_signature
-                  0x000557          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(fpack.daeo)
+                  0x00065d          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(floatsisf.daeo)
  __c30_signature
-                  0x00055d          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(funpack.daeo)
+                  0x000663          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(floatunsisf.daeo)
  __c30_signature
-                  0x000563          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(funpack2.daeo)
+                  0x000669          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(fpack.daeo)
  __c30_signature
-                  0x000569          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(futil.daeo)
+                  0x00066f          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(funpack.daeo)
  __c30_signature
-                  0x00056f          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(mulsf3.daeo)
+                  0x000675          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(funpack2.daeo)
  __c30_signature
-                  0x000575          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(sincosf.daeo)
+                  0x00067b          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(futil.daeo)
  __c30_signature
-                  0x00057b          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(sinf.daeo)
+                  0x000681          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(mulsf3.daeo)
  __c30_signature
-                  0x000581          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(umodsi3.daeo)
+                  0x000687          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(sincosf.daeo)
  __c30_signature
-                  0x000587          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(errno.daeo)
+                  0x00068d          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(sinf.daeo)
  __c30_signature
-                  0x00058d          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(fcompare.daeo)
+                  0x000693          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(sqrtf.daeo)
  __c30_signature
-                  0x000593          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(feqltle.daeo)
+                  0x000699          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(udivsi3.daeo)
  __c30_signature
-                  0x000599          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(floatdisf.daeo)
+                  0x00069f          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(errno.daeo)
  __c30_signature
-                  0x00059f          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(floatundisf.daeo)
+                  0x0006a5          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(fcompare.daeo)
  __c30_signature
-                  0x0005a5          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(fmodf.daeo)
+                  0x0006ab          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(feqltle.daeo)
  __c30_signature
-                  0x0005ab          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(fmodrem.daeo)
+                  0x0006b1          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(floatdisf.daeo)
  __c30_signature
-                  0x0005b1          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(udivsi3.daeo)
+                  0x0006b7          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(floatundisf.daeo)
  __c30_signature
-                  0x0005b7          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libc-elf.a(rand.daeo)
+                  0x0006bd          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(fmodf.daeo)
  __c30_signature
-                  0x0005bd          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(mulsi3.daeo)
+                  0x0006c3          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(fmodrem.daeo)
 
-.nbss               0x0800         0x14
- .nbss              0x0800          0xc build/default/production/gpu.o
-                    0x0800                  _frames
-                    0x0802                  _fb_ready
-                    0x0804                  _vsync
-                    0x0806                  _next_fb
- .nbss              0x080c          0x8 build/default/production/audio.o
+.nbss               0x0800         0x24
+ .nbss              0x0800         0x18 build/default/production/audio.o
+                    0x0800                  _ch1_val
+                    0x0802                  _ch2_val
+                    0x0804                  _ch3_val
+                    0x0806                  _time_sec
+                    0x080a                  _time_subsec
+ .nbss              0x0818          0x8 build/default/production/gpu.o
+                    0x0818                  _frames
+ .nbss              0x0820          0x4 build/default/production/scene.o
+                    0x0820                  _scene_func
 
-.ndata              0x0814          0x2
- .ndata             0x0814          0x2 build/default/production/gpu.o
-                    0x0814                  _maxCharHeight
+.ndata              0x0824          0x2
+ .ndata             0x0824          0x2 build/default/production/gpu.o
 
-.nbss               0x0816          0x4
- .nbss              0x0816          0x2 build/default/production/sprites.o
-                    0x0816                  _numPart
- .nbss              0x0818          0x2 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(errno.daeo)
-                    0x0818                  _errno
+.nbss               0x0826          0x2
+ .nbss              0x0826          0x2 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libm-elf.a(errno.daeo)
+                    0x0826                  _errno
 
-.bss                0x081a        0x310
- .bss               0x081a        0x30a build/default/production/sprites.o
-                    0x081a                  _color_array
-                    0x0830                  _s
-                    0x09bc                  _p
- .bss               0x0b24          0x6 /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libc-elf.a(rand.daeo)
+.bss                0x0828        0x3c2
+ .bss               0x0828        0x30a build/default/production/sprites.o
+                    0x0828                  _color_array
+                    0x083e                  _s
+                    0x09ca                  _p
+ .bss               0x0b32         0x60 build/default/production/alu.o
+                    0x0b32                  _inputMatrix
+                    0x0b42                  _outputMatrix
+                    0x0b52                  _rotationMatrix
+ .bss               0x0b92         0x34 build/default/production/gpu.o
+                    0x0b92                  _gfx
+ .bss               0x0bc6         0x24 build/default/production/scene.o
+                    0x0bc6                  _scene
 
 DISPLAY             0x5c00      0x12c00
  DISPLAY            0x5c00      0x12c00 build/default/production/gpu.o
@@ -1959,71 +1992,86 @@ FONTS               0x4ff8        0xc08
  .ivt._T1Interrupt
                   0x00001a          0x2 build/default/production/audio.o
 
-.const              0x88e8        0x3fc load address 0x0008e8  
- .const             0x88e8        0x3fc build/default/production/audio.o
+.const              0x88c4        0x400 load address 0x0008c4  
+ .const             0x88c4        0x400 build/default/production/audio.o
 
-_0131ac385ad57147
-                  0x000ce4       0x94d4
- _0131ac385ad57147
-                  0x000ce4       0x94d4 build/default/production/sprites.o
-                  0x000ce4                  _SpriteMap
+_014b1c945b00a0b5
+                  0x000cc4       0x94d4
+ _014b1c945b00a0b5
+                  0x000cc4       0x94d4 build/default/production/sprites.o
+                  0x000cc4                  _SpriteMap
 
-_0122278c5ad5630e
-                  0x00a1b8        0xb3a
- _0122278c5ad5630e
-                  0x00a1b8        0xb3a build/default/production/audio.o
+_012229b45b00a0b4
+                  0x00a198       0x3ece
+ _012229b45b00a0b4
+                  0x00a198       0x3ece build/default/production/audio.o
 
-.dinit            0x00acf2        0x840
- .dinit           0x00acf2        0x840 data_init
+_01222a105b00a0b4
+                  0x00e066       0x38da
+ _01222a105b00a0b4
+                  0x00e066       0x38da build/default/production/audio.o
 
-.text             0x00b532        0xf64
- .text            0x00b532        0x792 build/default/production/gpu.o
-                  0x00b532                  _config_graphics
-                  0x00b5f2                  _getHsync
-                  0x00b5f6                  _config_clut
-                  0x00b5fa                  _clut_set
-                  0x00b608                  _config_chr
-                  0x00b64a                  _chr_print
-                  0x00b692                  _rcc_color
-                  0x00b69e                  _chr_fg_color
-                  0x00b6a6                  _chr_bg_color
-                  0x00b6ae                  _rcc_setdest
-                  0x00b6bc                  _gpu_setfb
-                  0x00b6c2                  _waitForBufferFlip
-                  0x00b6e8                  _rcc_draw
-                  0x00b726                  _fast_pixel
-                  0x00b754                  _blank_background
-                  0x00b760                  _swapBuffers
-                  0x00b7ae                  _drawBorder
-                  0x00b7d4                  _cleanup
-                  0x00b7e2                  _clearbuffers
-                  0x00b7e4                  _radians
-                  0x00b7fa                  _realtoint
-                  0x00b84c                  _drawLineS
-                  0x00b84e                  _line
-                  0x00b930                  _render
- .text            0x00bcc4        0x626 build/default/production/sprites.o
-                  0x00bcc4                  _loadAllSprites
-                  0x00be44                  _loadSpriteCLUT
-                  0x00be66                  _drawSprite
-                  0x00bfc2                  _nrange
-                  0x00bff2                  _drawSpriteRotation
-                  0x00c166                  _addParticle
- .text            0x00c2ea        0x1ac build/default/production/main.o
-                  0x00c2ea                  _main
+_01222a6c5b00a0b4
+                  0x011940       0x26dc
+ _01222a6c5b00a0b4
+                  0x011940       0x26dc build/default/production/audio.o
 
-_0131abdc5ad57147
-                  0x00c496         0x80
- _0131abdc5ad57147
-                  0x00c496         0x80 build/default/production/sprites.o
-                  0x00c496                  _SpriteInfoMap
+.dinit            0x01401c        0x84c
+ .dinit           0x01401c        0x84c data_init
 
-.init.delay32     0x00c516         0x1c
- .init.delay32    0x00c516         0x1c /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libpic30-elf.a(delay32da.eo)
-                  0x00c516                  ___delay32
+.text             0x014868       0x1408
+ .text            0x014868        0x722 build/default/production/gpu.o
+                  0x014868                  _gpu_init
+                  0x014870                  _gpu_config
+                  0x0149dc                  _gpu_set_res
+                  0x014c10                  _gpu_set_fb
+                  0x014c16                  _gpu_config_clut
+                  0x014c1a                  _gpu_clut_set
+                  0x014c28                  _gpu_config_chr
+                  0x014c88                  _gpu_chr_print
+                  0x014cd4                  _gpu_chr_fg_color
+                  0x014cdc                  _gpu_chr_bg_color
+                  0x014ce4                  _rcc_set_fb_dest
+                  0x014cf2                  _gpu_flip_fb
+                  0x014d84                  _rcc_color
+                  0x014d8c                  _rcc_rec
+                  0x014dda                  _gpu_draw_border
+                  0x014e24                  _gpu_clear_fb
+                  0x014e38                  _gpu_clear_all_fb
+                  0x014e6c                  _rcc_pixel
+                  0x014ea8                  _rcc_line
+ .text            0x014f8a        0x52c build/default/production/sprites.o
+                  0x014f8a                  _sprites_load_all
+                  0x01510a                  _sprites_load_clut
+                  0x01512c                  _sprites_draw
+                  0x0152ee                  _sprites_nrange
+                  0x01531e                  _sprites_draw_angled
+ .text            0x0154b6        0x314 build/default/production/alu.o
+                  0x0154b6                  _radians
+                  0x0154cc                  _realtoint
+                  0x01551e                  _alu_rot
+                  0x015592                  _alu_calc_rot_matrix
+ .text            0x0157ca        0x228 build/default/production/scene.o
+                  0x0157ca                  _scene_one
+                  0x0157e6                  _scene_zero
+                  0x015946                  _scene_init
+                  0x015988                  _scene_render_frame
+ .text            0x0159f2        0x16a build/default/production/main.o
+                  0x0159f2                  _main
+ .text            0x015b5c        0x114 build/default/production/audio.o
+                  0x015b5c                  _audio_init
+                  0x015b7c                  _audio_isr
 
-.text             0x00c532         0x2e
- .text            0x00c532         0x18 build/default/production/audio.o
-                  0x00c532                  _config_timer
- .text            0x00c54a         0x16 build/default/production/color.o
-                  0x00c54a                  _rgb_2_565
+_014b1c385b00a0b5
+                  0x015c70         0x80
+ _014b1c385b00a0b5
+                  0x015c70         0x80 build/default/production/sprites.o
+                  0x015c70                  _SpriteInfoMap
+
+.init.delay32     0x015cf0         0x1c
+ .init.delay32    0x015cf0         0x1c /Applications/microchip/xc16/v1.34/bin/bin/../../lib/libpic30-elf.a(delay32da.eo)
+                  0x015cf0                  ___delay32
+
+.text             0x015d0c         0x16
+ .text            0x015d0c         0x16 build/default/production/color.o
+                  0x015d0c                  _rgb_2_565

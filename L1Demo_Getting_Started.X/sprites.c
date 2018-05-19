@@ -99,7 +99,7 @@ __prog__ uint8_t SpriteMap[] __attribute__((space(prog)))= {
 };
 
 /* Sprites */
-void loadAllSprites(void) 
+void sprites_load_all(void) 
 {
 	uint16_t id, ia, off_data, off_info;
 	off_data = 0;
@@ -125,61 +125,23 @@ void loadAllSprites(void)
 	}
 }
 
-void inline loadSpriteCLUT(uint16_t id)
+void inline sprites_load_clut(uint16_t id)
 {
-	/* LEGACY
-	unsigned int w,h,c;
-	uint16_t color;
-	uint8_t new_color_idx = 0;
-
-	for (h=0; h < s[id].height; h++) 
-	{
-		for (w=0; w < s[id].width; w++) 
-		{
-			color = s[id].data[w + s[id].width*h];
-
-			if(new_color_idx == 0)
-			{
-				color_array[new_color_idx] = color;
-				new_color_idx++;
-			}
-			else
-			{
-				// Search
-				for(c=0; c<8; c++)
-				{
-					if(color_array[c] == color)
-					{
-						c = 10;
-					}
-					else if(c == 7)
-					{
-						color_array[new_color_idx] = color;
-						if(new_color_idx < 7)
-						{
-							new_color_idx++;
-						}
-					}
-				}
-			}
-		}
-	}
-	*/
 	uint8_t clut_idx = 0;
 	for(clut_idx=0; clut_idx<11; clut_idx++)
 	{
-		clut_set(clut_idx, s[id].info.color_array[clut_idx]);
+		gpu_clut_set(clut_idx, s[id].info.color_array[clut_idx]);
 	}
 }
 
 
-void inline drawSprite(uint16_t x, uint16_t y, uint16_t id, uint16_t rotation, uint8_t crt) 
+void inline sprites_draw(uint16_t x, uint16_t y, uint16_t id, uint16_t rotation, uint8_t crt) 
 {
 	unsigned int w,h;
 	uint16_t x1,y1;
 	uint16_t color;
 
-	if (x >= HOR_RES-1 || y >= VER_RES-1 || x <= 0|| y <= 0) return;
+	if (x >= gfx.hres-1 || y >= gfx.vres-1 || x <= 0|| y <= 0) return;
 
 	for (h=0; h < s[id].info.height; h++) {
 		for (w=0; w < s[id].info.width; w++) {
@@ -199,24 +161,24 @@ void inline drawSprite(uint16_t x, uint16_t y, uint16_t id, uint16_t rotation, u
 				//  90 deg CW   0,7 0,6 0,5 ... 1,6
 				case 0: // 0 degree
 					x1 = x + w;
-					y1 = y + (h<<crt); //h; //(h<<1);//y+(PIX_H*h);
-					if (x1 >= HOR_RES-2) continue; //br
-					if (y1 >= VER_RES-PIX_H) return; //ret
-					fast_pixel(x1, y1);
+					y1 = y + (h<<crt); //h; //(h<<1);//y+(gfx.hscale*h);
+					if (x1 >= gfx.hres-2) continue; //br
+					if (y1 >= gfx.vres-gfx.hscale) return; //ret
+					rcc_pixel(x1, y1);
 					break;
 				case 1: // 90 degree CW
 					x1 = x+(s[id].info.width-h-1);
-					y1 = y+(PIX_H*(w));
-					if (x1 >= HOR_RES-1 || x1 <= 0) continue;
-					if (y1 >= VER_RES-PIX_H || y1 <= 0) continue;
-					fast_pixel(x1, y1);
+					y1 = y+(gfx.hscale*(w));
+					if (x1 >= gfx.hres-1 || x1 <= 0) continue;
+					if (y1 >= gfx.vres-gfx.hscale || y1 <= 0) continue;
+					rcc_pixel(x1, y1);
 					break;
 				case 2: // 180 degree CW
 					x1 = x+(s[id].info.width-w-1);
-					y1 = y+(PIX_H*(s[id].info.height-h-1));
-					if (x1 >= HOR_RES-1) continue;
-					if (y1 >= VER_RES-PIX_H) continue;
-					fast_pixel(x1, y1);
+					y1 = y+(gfx.hscale*(s[id].info.height-h-1));
+					if (x1 >= gfx.hres-1) continue;
+					if (y1 >= gfx.vres-gfx.hscale) continue;
+					rcc_pixel(x1, y1);
 					break;
 				case 3: // 90 degree CCW
 					break;
@@ -229,12 +191,7 @@ void inline drawSprite(uint16_t x, uint16_t y, uint16_t id, uint16_t rotation, u
 	//Nop();
 }
 
-int inline nrange(double a, double b) 
-{
-	return (int)((a >= b) ? a-b : b-a);
-}
-
-void drawSpriteRotation(uint16_t x, uint16_t y, uint16_t id, float rotation) 
+void inline sprites_draw_angled(uint16_t x, uint16_t y, uint16_t id, float rotation) 
 {
 	int x1,y1,x2,y2;
 	unsigned int w,h, real_x, real_y;
@@ -256,27 +213,17 @@ void drawSpriteRotation(uint16_t x, uint16_t y, uint16_t id, float rotation)
 			x2 = x1*r_c - y1*r_s;
 			y2 = x1*r_s + y1*r_c;
 
-			real_x = x+nrange(x1,x2);
-			real_y = y + PIX_H*nrange(y1,y2);
+			real_x = x+sprites_nrange(x1,x2);
+			real_y = y + gfx.hscale*sprites_nrange(y1,y2);
 
-			if (real_x >= HOR_RES-1 || real_x <= 0) continue;
-			if (real_y >= VER_RES-PIX_H || real_y <= 0) continue; // PIX_H for screen bordered setup
-			//rcc_draw(real_x, real_y, 1, PIX_H);
-			fast_pixel(real_x, real_y);
+			if (real_x >= gfx.hres-1 || real_x <= 0) continue;
+			if (real_y >= gfx.vres-gfx.hres || real_y <= 0) continue; // gfx.hscale for screen bordered setup
+			rcc_pixel(real_x, real_y);
 		}
 	}
 }
 
-/* Particles */
-int numPart=0;
-
-void addParticle(void)
+int inline sprites_nrange(double a, double b) 
 {
-    p[numPart].size = 1;
-    p[numPart].posx = rand() % (HOR_RES-2);
-    p[numPart].posy = 1+(rand() % (VER_RES-7));
-    p[numPart].speedx = 1+(rand() % 2);
-    p[numPart].speedy = 0;
-    p[numPart].color = rand();
-    numPart++;
+	return (int)((a >= b) ? a-b : b-a);
 }

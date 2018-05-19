@@ -2593,7 +2593,7 @@
 //
 //};
 
-uint8_t FontStart[] __attribute__((space(eds), section("FONTS") )) = {
+__eds__ uint8_t FontStart[] __attribute__((space(eds), section("FONTS") )) = {
     0x00, 0x00, 0x00, 0x00, 0xff, 0x00, 0x08, 0x00,
     6,8,4,0, //0x0
     6,16,4,0, //0x1

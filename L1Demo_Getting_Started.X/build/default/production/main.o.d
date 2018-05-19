@@ -4,4 +4,5 @@ gpu.h  \
 audio.h  \
 color.h  \
 music.h  \
- sprites.h 
+ sprites.h  \
+scene.h 
